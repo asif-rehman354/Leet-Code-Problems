@@ -1,0 +1,23 @@
+public static string SortColor(string s)
+        {
+            string result = string.Empty;
+            List<string> inputList = s.Split(' ').ToList();
+
+            inputList.Sort(new ReverseStringComparer());
+
+            var output = String.Join(" ", inputList.OrderBy(a => a.Last()));
+            var listData = output.Split(' ').ToList();
+            for (int i = 0; i < listData.Count(); i++)
+            {
+                if (i == 0)
+                {
+                    result = listData[i].Remove(listData[i].Length - 1, 1);
+                }
+                else
+                {
+                    result = result + " " + listData[i].Remove(listData[i].Length - 1, 1);
+                }
+            }
+
+            return result;
+        }
