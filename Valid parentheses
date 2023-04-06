@@ -1,0 +1,30 @@
+public static bool IsValidBracket(string s)
+        {
+            Stack left = new Stack();
+            foreach (char c in s.ToCharArray())
+            {
+                if (c == '(' || c == '{' || c == '[')
+                {
+                    left.Push(c); // Get left
+                }
+                // Compare to right:
+                else if (c == ')' && left.Count != 0 && (char)left.Peek() == '(')
+                {
+                    left.Pop();
+                }
+                else if (c == '}' && left.Count != 0 && (char)left.Peek() == '{')
+                {
+                    left.Pop();
+                }
+                else if (c == ']' && left.Count != 0 && (char)left.Peek() == '[')
+                {
+                    left.Pop();
+                }
+                else
+                {
+                    var d = left.ToArray().Sum(b => (long)b);
+                    return false; // no match
+                }
+            }
+            return true;
+        }
