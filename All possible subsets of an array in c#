@@ -1,0 +1,22 @@
+public static IList<IList<int>> Subsets(int[] nums)
+        {
+            IList<IList<int>> result = new List<IList<int>>();
+            if (nums == null)
+            {
+                return result;
+            }
+            result.Add(new List<int>());
+            foreach (var num in nums)
+            {
+                var subsetNew = new List<IList<int>>();
+                foreach (var curr in result)
+                {
+                    subsetNew.Add(new List<int>(curr) { num });
+                }
+                foreach (var sub in subsetNew)
+                {
+                    result.Add(sub);
+                }
+            }
+            return result;
+        }
