@@ -1,0 +1,45 @@
+public static int CalPoints(String[] ops)
+        {
+            List<int> list = new List<int>();
+
+            int length = ops.Length;
+            for (int i = 0; i < length; i++)
+            {
+                int size = list.Count();
+                char[] chars = ops[i].ToCharArray();
+                char first = chars[0];
+
+                switch (first)
+                {
+                    case 'C':
+                        list.RemoveAt(size - 1);
+                        break;
+                    case 'D':
+                        list.Add(list[(size - 1)] * 2);
+                        break;
+                    case '+':
+                        int sum = list[(size - 1)] + list[(size - 2)];
+                        list.Add(sum);
+                        break;
+                    default: // [1]
+                        int flag = 1;
+                        int val = 0;
+                        foreach (char c in chars)
+                        {
+                            if (c == '-')
+                            {
+                                flag = -1;
+                                continue;
+                            }
+                            val *= 10;
+                            val += c - '0';
+                        }
+                        list.Add(val * flag);
+                        break;
+                }
+            }
+
+            int ans = list.Sum();
+
+            return ans;
+        }
