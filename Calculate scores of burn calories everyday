@@ -1,0 +1,32 @@
+//A workout plan has a schedule to burn calories everyday. given an array cals, a person burns cals[k] calories on the k-th day of workout plan.
+//Given the number of days d, for every consective sequence of d days (casl[k], cals[k+1], ...., cals[k+d+1]) for all 0<=k<=n-d.
+//We look at the total calorie burned during the sequence of the days (casl[k], cals[k+1], ...., cals[k+d+1]): If total < min, the are not burning enough claories,
+//so one point gets deducted from their score. if total > max, ther are foing good and burning a good amount of calories, so one point is added to their score.
+//Otherwise, the are just doing fine and their score is kept the same with no point changes.
+//Calculate and return the total score the person has after working out for cals.length days in c#
+
+public static int CalculateScore(int[] cals, int d, int min, int max)
+        {
+            int score = 0;
+
+            for (int i = 0; i <= cals.Length - d; i++)
+            {
+                int total = 0;
+
+                for (int j = i; j < i + d; j++)
+                {
+                    total += cals[j];
+                }
+
+                if (total < min)
+                {
+                    score--;
+                }
+                else if (total > max)
+                {
+                    score++;
+                }
+            }
+
+            return score;
+        }
